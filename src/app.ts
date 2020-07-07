@@ -54,6 +54,33 @@ app.get('/users/:id', async (req, res) => {
   }
 });
 
+app.patch('/users/:id', async (req, res) => {
+  const allowedUpdates = ['name', 'email', 'password', 'age'];
+  const updates = Object.keys(req.body);
+  const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid to perform the updates sent.' });
+  }
+
+  try {
+    const _id = req.params.id;
+    const user = await UserModel.findByIdAndUpdate(_id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) {
+      return res.status(404).send();
+    }
+
+    res.send(user);
+  } catch (error) {
+    console.log('error :>> ', error);
+    res.status(400).send(error);
+  }
+});
+
 // Tasks
 
 app.post('/tasks', async (req, res) => {
