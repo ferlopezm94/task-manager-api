@@ -54,14 +54,16 @@ router.patch('/tasks/:id', async (req, res) => {
 
   try {
     const _id = req.params.id;
-    const task = await TaskModel.findByIdAndUpdate(_id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const task = await TaskModel.findById(_id);
 
     if (!task) {
       return res.status(404).send();
     }
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    updates.forEach(update => (task[update] = req.body[update]));
+    await task.save();
 
     res.send(task);
   } catch (error) {

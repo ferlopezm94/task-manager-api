@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import validator from 'validator';
 
@@ -48,6 +49,16 @@ const UserSchema = new mongoose.Schema({
       message: 'Age must be a positive number',
     },
   },
+});
+
+UserSchema.pre('save', async function (next) {
+  const user = this as User;
+
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+
+  next();
 });
 
 export const UserModel = mongoose.model<User>('User', UserSchema);

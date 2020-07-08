@@ -54,14 +54,16 @@ router.patch('/users/:id', async (req, res) => {
 
   try {
     const _id = req.params.id;
-    const user = await UserModel.findByIdAndUpdate(_id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const user = await UserModel.findById(_id);
 
     if (!user) {
       return res.status(404).send();
     }
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    updates.forEach(update => (user[update] = req.body[update]));
+    await user.save();
 
     res.send(user);
   } catch (error) {
