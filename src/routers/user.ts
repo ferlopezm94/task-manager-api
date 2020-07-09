@@ -16,6 +16,16 @@ router.post('/users', async (req, res) => {
   }
 });
 
+router.post('/users/login', async (req, res) => {
+  try {
+    const user = await UserModel.findByCredentials(req.body.email, req.body.password);
+    res.send(user);
+  } catch (error) {
+    console.log('error :>> ', error);
+    res.status(400).send();
+  }
+});
+
 router.get('/users', async (_req, res) => {
   try {
     const users = await UserModel.find({});
