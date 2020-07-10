@@ -1,12 +1,19 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
+
+type Token = {
+  token: string;
+};
 
 interface User extends mongoose.Document {
   name: string;
   email: string;
   password: string;
   age: number;
+  tokens: Token[];
+  generateAuthToken(): string;
 }
 
 const UserSchema = new mongoose.Schema({
@@ -50,7 +57,25 @@ const UserSchema = new mongoose.Schema({
       message: 'Age must be a positive number',
     },
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
+
+UserSchema.methods.generateAuthToken = async function () {
+  const user = this as User;
+  const token = jwt.sign({ _id: user._id.toString() }, 'mysecret');
+
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+
+  return token;
+};
 
 UserSchema.statics.findByCredentials = async (email: string, password: string) => {
   const user = await UserModel.findOne({ email });
@@ -80,7 +105,7 @@ UserSchema.pre('save', async function (next) {
 });
 
 interface IUserModel extends mongoose.Model<User> {
-  findByCredentials(email: string, password: string): string;
+  findByCredentials(email: string, password: string): User;
 }
 
 export const UserModel = mongoose.model<User, IUserModel>('User', UserSchema);
