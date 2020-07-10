@@ -7,7 +7,7 @@ type Token = {
   token: string;
 };
 
-interface User extends mongoose.Document {
+export interface User extends mongoose.Document {
   name: string;
   email: string;
   password: string;

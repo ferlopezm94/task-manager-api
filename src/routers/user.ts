@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { auth } from './../middleware/auth';
 import { UserModel } from './../models/user';
 
 const router = express.Router();
@@ -28,14 +29,8 @@ router.post('/users/login', async (req, res) => {
   }
 });
 
-router.get('/users', async (_req, res) => {
-  try {
-    const users = await UserModel.find({});
-    res.send(users);
-  } catch (error) {
-    console.log('error :>> ', error);
-    res.status(500).send();
-  }
+router.get('/users/me', auth, async (req, res) => {
+  res.send(req.user);
 });
 
 router.get('/users/:id', async (req, res) => {
