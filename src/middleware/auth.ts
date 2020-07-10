@@ -6,6 +6,7 @@ import { User, UserModel } from './../models/user';
 declare module 'express-serve-static-core' {
   interface Request {
     user: User;
+    token: string;
   }
 }
 
@@ -30,6 +31,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     req.user = user;
+    req.token = token;
     next();
   } catch (error) {
     console.log('error :>> ', error);
