@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
 
+import { TaskModel } from './task';
+
 type Token = {
   token: string;
 };
@@ -117,6 +119,13 @@ UserSchema.pre('save', async function (next) {
     user.password = await bcrypt.hash(user.password, 8);
   }
 
+  next();
+});
+
+// Delete user tasks when user is removed
+UserSchema.pre('remove', async function (next) {
+  const user = this as User;
+  await TaskModel.deleteMany({ owner: user._id });
   next();
 });
 
