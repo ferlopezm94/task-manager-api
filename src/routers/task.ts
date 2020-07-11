@@ -1,11 +1,14 @@
 import express from 'express';
 
 import { TaskModel } from './../models/task';
-
+import { auth } from './../middleware/auth';
 const router = express.Router();
 
-router.post('/tasks', async (req, res) => {
-  const task = new TaskModel(req.body);
+router.post('/tasks', auth, async (req, res) => {
+  const task = new TaskModel({
+    ...req.body,
+    owner: req.user._id,
+  });
 
   try {
     await task.save();
