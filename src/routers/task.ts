@@ -21,7 +21,7 @@ router.post('/tasks', auth, async (req, res) => {
 
 router.get('/tasks', auth, async (req, res) => {
   const match: { completed?: boolean } = {};
-  const { completed } = req.query;
+  const { completed, limit, skip } = req.query;
 
   if (completed) {
     match.completed = completed === 'true';
@@ -32,6 +32,10 @@ router.get('/tasks', auth, async (req, res) => {
       .populate({
         path: 'tasks',
         match,
+        options: {
+          limit: parseInt(limit as string),
+          skip: parseInt(skip as string),
+        },
       })
       .execPopulate();
     // eslint-disable-next-line
