@@ -5,21 +5,26 @@ interface Task extends mongoose.Document {
   completed: boolean;
 }
 
-const TaskSchema = new mongoose.Schema({
-  description: {
-    type: String,
-    required: true,
-    trim: true,
+const TaskSchema = new mongoose.Schema(
+  {
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
-  completed: {
-    type: Boolean,
-    default: false,
+  {
+    timestamps: true,
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'User',
-  },
-});
+);
 
 export const TaskModel = mongoose.model<Task>('Task', TaskSchema);

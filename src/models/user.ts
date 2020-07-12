@@ -18,56 +18,61 @@ export interface User extends mongoose.Document {
   generateAuthToken(): string;
 }
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    validate: {
-      validator(value: string) {
-        return validator.isEmail(value);
-      },
-      message: 'Email is invalid',
+const UserSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 7,
-    validate: {
-      validator(value: string) {
-        return !value.toLowerCase().includes('password');
-      },
-      message: 'Password cannot contain "password"',
-    },
-  },
-  age: {
-    type: Number,
-    default: 0,
-    validate: {
-      validator(value: number) {
-        return value >= 0;
-      },
-      message: 'Age must be a positive number',
-    },
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      validate: {
+        validator(value: string) {
+          return validator.isEmail(value);
+        },
+        message: 'Email is invalid',
       },
     },
-  ],
-});
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 7,
+      validate: {
+        validator(value: string) {
+          return !value.toLowerCase().includes('password');
+        },
+        message: 'Password cannot contain "password"',
+      },
+    },
+    age: {
+      type: Number,
+      default: 0,
+      validate: {
+        validator(value: number) {
+          return value >= 0;
+        },
+        message: 'Age must be a positive number',
+      },
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  },
+);
 
 UserSchema.virtual('tasks', {
   ref: 'Task',
