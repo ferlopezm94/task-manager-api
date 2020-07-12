@@ -20,8 +20,20 @@ router.post('/tasks', auth, async (req, res) => {
 });
 
 router.get('/tasks', auth, async (req, res) => {
+  const match: { completed?: boolean } = {};
+  const { completed } = req.query;
+
+  if (completed) {
+    match.completed = completed === 'true';
+  }
+
   try {
-    await req.user.populate('tasks').execPopulate();
+    await req.user
+      .populate({
+        path: 'tasks',
+        match,
+      })
+      .execPopulate();
     // eslint-disable-next-line
     // @ts-ignore
     res.send(req.user.tasks);
