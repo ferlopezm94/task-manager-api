@@ -15,6 +15,7 @@ export interface User extends mongoose.Document {
   password: string;
   age: number;
   tokens: Token[];
+  avatar?: Buffer;
   generateAuthToken(): string;
 }
 
@@ -68,6 +69,9 @@ const UserSchema = new mongoose.Schema(
         },
       },
     ],
+    avatar: {
+      type: Buffer,
+    },
   },
   {
     timestamps: true,
@@ -86,6 +90,7 @@ UserSchema.methods.toJSON = function () {
 
   delete userObject.password;
   delete userObject.tokens;
+  delete userObject.avatar;
 
   return userObject;
 };
