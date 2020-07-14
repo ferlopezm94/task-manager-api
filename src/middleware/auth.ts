@@ -23,7 +23,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     token = token.replace('Bearer ', '');
-    const decoded = jwt.verify(token, 'mysecret') as Payload;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || '') as Payload;
     const user = await UserModel.findOne({ _id: decoded._id, 'tokens.token': token });
 
     if (!user) {

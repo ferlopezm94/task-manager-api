@@ -8,8 +8,8 @@
   "scripts": {
     "build": "tsc",
     "commit": "git-cz",
-    "develop": "ts-node-dev --respawn --no-notify --transpileOnly src/app.ts",
-    "develop:inspect": "ts-node-dev --inspect-brk --respawn --no-notify --transpileOnly src/app.ts",
+    "develop": "env-cmd -f ./config/dev.env ts-node-dev --respawn --no-notify --transpileOnly src/app.ts",
+    "develop:inspect": "env-cmd ./config/dev.env ts-node-dev --inspect-brk --respawn --no-notify --transpileOnly src/app.ts",
     "lint": "eslint . --ext .js,.ts",
     "prebuild": "rm -rf ./build",
     "semantic-release": "semantic-release",
@@ -47,6 +47,7 @@
     "@typescript-eslint/parser": "3.0.0",
     "commitizen": "4.1.2",
     "cz-conventional-changelog": "3.2.0",
+    "env-cmd": "10.1.0",
     "eslint": "7.1.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.3",

@@ -1,6 +1,10 @@
 # Build folders
 build/
 
+# Config
+config/*
+!config/sample.env
+
 # Dependency directories
 node_modules/
 
