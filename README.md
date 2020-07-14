@@ -16,8 +16,8 @@ Make sure the following tools are installed in your system:
 Clone the GitHub repository and user `yarn` to install the dependencies.
 
 ```
-$ git clone https://github.com/ferlopezm94/task-manager.git
-$ cd task-manager
+$ git clone https://github.com/ferlopezm94/task-manager-api.git
+$ cd task-manager-api
 $ yarn install
 ```
 
