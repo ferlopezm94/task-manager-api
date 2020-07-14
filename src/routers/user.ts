@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import sharp from 'sharp';
 
+import { sendWelcomeEmail, sendCancelationEmail } from './../emails/account';
 import { auth } from './../middleware/auth';
 import { UserModel } from './../models/user';
 
@@ -12,6 +13,7 @@ router.post('/users', async (req, res) => {
 
   try {
     await user.save();
+    sendWelcomeEmail(user.email, user.name);
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (error) {
@@ -81,6 +83,7 @@ router.patch('/users/me', auth, async (req, res) => {
 router.delete('/users/me', auth, async (req, res) => {
   try {
     await req.user.remove();
+    sendCancelationEmail(req.user.email, req.user.name);
     res.send(req.user);
   } catch (error) {
     console.log('error :>> ', error);
