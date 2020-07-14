@@ -1,6 +1,6 @@
 {
   "name": "task-manager-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "REST API to manage personal tasks.",
   "main": "build/app.js",
   "author": "Fenando López Martínez",
