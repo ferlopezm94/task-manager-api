@@ -1,8 +1,8 @@
 import request from 'supertest';
 
-import { UserModel } from './../models/user';
-import { app } from './../app';
-import { userOne, userOneId, setupDatabase } from './fixtures/db';
+import { UserModel } from './../model';
+import { userOne, userOneId, setupDatabase } from './../../__tests__/fixtures/db';
+import { app } from './../../app';
 
 // User tests ideas
 //
