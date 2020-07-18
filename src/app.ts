@@ -1,6 +1,6 @@
 import express from 'express';
 
-import './db/mongoose';
+import './utils/mongoose';
 import tasksController from './tasks/controller';
 import usersController from './users/controller';
 

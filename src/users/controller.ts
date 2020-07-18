@@ -3,8 +3,8 @@ import multer from 'multer';
 import sharp from 'sharp';
 
 import { UserModel } from './model';
-import { sendWelcomeEmail, sendCancelationEmail } from './../emails/account';
-import { auth } from './../middleware/auth';
+import { sendWelcomeEmail, sendCancelationEmail } from './../utils/emails';
+import { auth } from './../middlewares/auth';
 
 const router = express.Router();
 const baseURL = '/users';
