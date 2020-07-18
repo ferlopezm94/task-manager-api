@@ -34,7 +34,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     req.token = token;
     next();
   } catch (error) {
-    console.log('error :>> ', error);
+    console.log('auth error :>> ', error.message);
     res.status(401).send({ error: 'Please authenticate.' });
   }
 };
