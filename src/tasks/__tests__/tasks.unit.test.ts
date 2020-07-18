@@ -1,9 +1,8 @@
 import request from 'supertest';
 
-import { TaskModel } from './../models/task';
-import { app } from './../app';
-
-import { userOne, userTwo, taskOne, setupDatabase } from './fixtures/db';
+import { TaskModel } from './../model';
+import { userOne, userTwo, taskOne, setupDatabase } from './../../__tests__/fixtures/db';
+import { app } from './../../app';
 
 // Task tests ideas
 //

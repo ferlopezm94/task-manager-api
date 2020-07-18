@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
 
-import { TaskModel } from './../models/task';
+import { TaskModel } from './../tasks/model';
 
 type Token = {
   token: string;

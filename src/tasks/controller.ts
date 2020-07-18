@@ -1,8 +1,10 @@
 import express from 'express';
 
-import { TaskModel } from './../models/task';
+import { TaskModel } from './model';
 import { auth } from './../middleware/auth';
+
 const router = express.Router();
+// const baseURL = '/tasks';
 
 router.post('/tasks', auth, async (req, res) => {
   const task = new TaskModel({
