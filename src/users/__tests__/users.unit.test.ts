@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import { UserModel } from './../model';
-import { userOne, userOneId, setupDatabase } from './../../__tests__/fixtures/db';
+import { userOne, userOneId, setupDatabase } from './../../fixtures/db';
 import { app } from './../../app';
 
 // User tests ideas
@@ -95,7 +95,7 @@ describe('User tests', () => {
     await request(app)
       .post('/users/me/avatar')
       .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
-      .attach('avatar', 'src/__tests__/fixtures/profile-pic.jpg')
+      .attach('avatar', 'src/fixtures/profile-pic.jpg')
       .expect(200);
 
     const user = await UserModel.findById(userOneId);
