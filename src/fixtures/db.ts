@@ -60,3 +60,7 @@ export const setupDatabase = async () => {
   await new TaskModel(taskTwo).save();
   await new TaskModel(taskThree).save();
 };
+
+export const closeDatabase = async () => {
+  await mongoose.connection.close();
+};

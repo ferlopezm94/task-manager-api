@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import { TaskModel } from './../model';
-import { userOne, userTwo, taskOne, setupDatabase } from './../../fixtures/db';
+import { userOne, userTwo, taskOne, setupDatabase, closeDatabase } from './../../fixtures/db';
 import { app } from './../../app';
 
 // Task tests ideas
@@ -21,6 +21,7 @@ import { app } from './../../app';
 
 describe('Task tests', () => {
   beforeEach(setupDatabase);
+  afterAll(closeDatabase);
 
   test('Should create task for a user', async () => {
     const response = await request(app)

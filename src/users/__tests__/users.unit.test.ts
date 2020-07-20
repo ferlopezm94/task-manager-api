@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import { UserModel } from './../model';
-import { userOne, userOneId, setupDatabase } from './../../fixtures/db';
+import { userOne, userOneId, setupDatabase, closeDatabase } from './../../fixtures/db';
 import { app } from './../../app';
 
 // User tests ideas
@@ -13,6 +13,7 @@ import { app } from './../../app';
 
 describe('User tests', () => {
   beforeEach(setupDatabase);
+  afterAll(closeDatabase);
 
   test('Should signup a new user', async () => {
     const response = await request(app)
