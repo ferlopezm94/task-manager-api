@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ferlopezm94/task-manager-api/compare/v1.0.0...v1.0.1) (2020-07-20)
+
+
+### Bug Fixes
+
+* **tests:** close database connection ([79f5c06](https://github.com/ferlopezm94/task-manager-api/commit/79f5c06bc8fa7e9c7273099b879df46713a93cb2))
+
 # 1.0.0 (2020-07-14)
 
 
