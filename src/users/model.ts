@@ -3,21 +3,8 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
 
+import { User } from './interface';
 import { TaskModel } from './../tasks/model';
-
-type Token = {
-  token: string;
-};
-
-export interface User extends mongoose.Document {
-  name: string;
-  email: string;
-  password: string;
-  age: number;
-  tokens: Token[];
-  avatar?: Buffer;
-  generateAuthToken(): string;
-}
 
 const UserSchema = new mongoose.Schema(
   {

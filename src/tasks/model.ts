@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 
-interface Task extends mongoose.Document {
-  description: string;
-  completed: boolean;
-}
+import { Task } from './interface';
 
 const TaskSchema = new mongoose.Schema(
   {

@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { User, UserModel } from './../users/model';
+import { User } from './../users/interface';
+import { UserModel } from './../users/model';
 
 declare module 'express-serve-static-core' {
   interface Request {
