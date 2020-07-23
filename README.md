@@ -10,10 +10,11 @@ Make sure the following tools are installed in your system:
 
 - [Node v12.X.X](https://nodejs.org/en/download/)
 - [Yarn v1.21.X](https://yarnpkg.com/en/docs/install)
+- [MongoDB v4.2.X](https://www.mongodb.com/try/download/community)
 
 ### Installation
 
-Clone the GitHub repository and user `yarn` to install the dependencies.
+Clone the GitHub repository and use `yarn` to install the dependencies:
 
 ```
 $ git clone https://github.com/ferlopezm94/task-manager-api.git
@@ -25,10 +26,10 @@ $ yarn install
 
 ### Local
 
-To start developing add a `dev.env` file inside `config` folder (check `sample.env`) and run:
+Start your MongoDB server (`mongod`), add a `dev.env` file inside `config` folder (check `sample.env`) and run:
 
 ```
-$ yarn develop
+$ yarn dev
 ```
 
 `ts-node-dev` will compile and start your program. You can start making some changes and each one will trigger a restart to your program.
